@@ -64,9 +64,9 @@ def createSheet(service):
     spreadSheetId = str(spreadSheet.get('spreadsheetId'))
     print('Spreadsheet ID: {0}'.format(spreadSheetId))
     return spreadSheetId
-    
+
 # WRITE 
-def writeSheet(service, spreadSheetId, symbol = "ITC"):
+def writeSheet(service, spreadSheetId, symbol ):
     values = [
         ['=GOOGLEFINANCE('+symbol+', "ALL", "01/01/1970", TODAY())']
     ]
@@ -76,6 +76,11 @@ def writeSheet(service, spreadSheetId, symbol = "ITC"):
     range_name = 'Sheet1!A1:A1'
     result = service.spreadsheets().values().update(spreadsheetId=spreadSheetId, range=range_name, valueInputOption='USER_ENTERED', body=body).execute()
     #print('{0} cells updated.'.format(result.get('updatedCells')))
+
+# DELETE
+def deleteSheet(service, allSheets ):
+    for i in range(len(allSheets)):
+        service.files().delete(fileId=allSheets[i]).execute()
 
 def stockSymbols(selector):
     SYMBOLS_PATH_excel = "symbols"
@@ -117,6 +122,7 @@ def symbolsSheet(sheetService, stock_symbols, indexname):
     for i in range(len(stock_symbols)):
         spreadSheetId = createSheet(sheetService)
         time.sleep(4)
+        writeSheet(sheetService, spreadSheetId, indexname)
         thisdict[stock_symbols[i]] = spreadSheetId
         json_writer(thisdict,indexname)
     return thisdict
@@ -137,18 +143,18 @@ def main():
     #downloadFile(sheetService)
     #spreadSheetId = createSheet(sheetService)
     # dictonary or hash table key = symbol and value = sheel id
-    #link to excel to reterive symbols C:\Zerodha\Pi\LinkExcel
 
+    #clear all data
+    allSheets = retrieve_all_files(driveService)
+    deleteSheet(driveService, allSheets)
+    #link to excel to reterive symbols C:\Zerodha\Pi\LinkExcel
+    #indexname is stockindexs name retrieved from symbols directory using selector variable
     selector = 3
     indexname = str(listIndex(selector))
     print(indexname)
     stock_symbols = stockSymbols(indexname)
     symbolsSheet(sheetService, stock_symbols, indexname)
 
-
-    #retrieve_all_files(driveService)
-    #delete everything
-    # get a list stock symbols - 
     #insert_permission(service = driveService, file_id = '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg', permission_type = 'anyone', role = 'writer')
     #getSheet(sheetService, '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg')
     #writeSheet(service=sheetService, spreadSheetId = '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg')
