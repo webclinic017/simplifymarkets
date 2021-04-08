@@ -142,7 +142,7 @@ def main():
     #changePermission(driveService, '1XucNbcohP3Z_e8kYcL9odGlE1Qx_vFGyCeNYQhLVDgk', )
     #downloadFile(sheetService)
     #spreadSheetId = createSheet(sheetService)
-    # dictonary or hash table key = symbol and value = sheel id
+    # dictonary / hash table key = symbol and value = sheel id
 
     #clear all data
     allSheets = retrieve_all_files(driveService)
