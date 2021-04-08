@@ -48,8 +48,7 @@ def insert_permission(service, file_id, value = '', permission_type = 'anyone', 
 # GET
 def getSheet(service, spreadsheet_id, ranges = [], include_grid_data = False):
     # Call the Sheets API
-    sheet = service.spreadsheets()
-    request = sheet.get(spreadsheetId=spreadsheet_id, ranges=ranges, includeGridData=include_grid_data)
+    request = service.spreadsheets().get(spreadsheetId=spreadsheet_id, ranges=ranges, includeGridData=include_grid_data)
     response = request.execute()
     print(response)
 
@@ -66,7 +65,7 @@ def createSheet(service):
     return spreadSheetId
 
 # WRITE 
-def writeSheet(service, spreadSheetId, symbol ):
+def writeSheet(service, spreadSheetId, symbol):
     values = [
         ['=GOOGLEFINANCE('+symbol+', "ALL", "01/01/1970", TODAY())']
     ]
@@ -78,9 +77,8 @@ def writeSheet(service, spreadSheetId, symbol ):
     #print('{0} cells updated.'.format(result.get('updatedCells')))
 
 # DELETE
-def deleteSheet(service, allSheets ):
-    for i in range(len(allSheets)):
-        service.files().delete(fileId=allSheets[i]).execute()
+def deleteSheet(service, spreadSheetId):
+    service.files().delete(fileId=spreadSheetId).execute()
 
 def stockSymbols(selector):
     SYMBOLS_PATH_excel = "symbols"
@@ -101,6 +99,7 @@ def stockSymbols(selector):
         raw_data = raw_data.split('-')[0]
         stock_symbols.insert(i, raw_data)
     return stock_symbols
+
 
 def json_writer(thisdict, index):
     filename = index + ".json"
@@ -127,6 +126,12 @@ def symbolsSheet(sheetService, stock_symbols, indexname):
         json_writer(thisdict,indexname)
     return thisdict
 
+# DELETE ALL the Sheets
+def resetDatabase(driveService):
+    allSheets = retrieve_all_files(driveService)
+    for i in range(len(allSheets)):
+        deleteSheet(driveService, allSheets[i]['id'])
+
 def main():
     SCOPES = ['https://www.googleapis.com/auth/sqlservice.admin', 
           'https://www.googleapis.com/auth/spreadsheets',
@@ -138,26 +143,15 @@ def main():
     sheetService = build('sheets', 'v4', credentials=creds)
     driveService = build('drive', 'v2', credentials=creds)
 
-    #insert_permission(service = driveService, file_id = '1XucNbcohP3Z_e8kYcL9odGlE1Qx_vFGyCeNYQhLVDgk', permission_type = 'anyone', role = 'reader')
-    #changePermission(driveService, '1XucNbcohP3Z_e8kYcL9odGlE1Qx_vFGyCeNYQhLVDgk', )
-    #downloadFile(sheetService)
-    #spreadSheetId = createSheet(sheetService)
-    # dictonary / hash table key = symbol and value = sheel id
-
-    #clear all data
-    allSheets = retrieve_all_files(driveService)
-    deleteSheet(driveService, allSheets)
+    """
     #link to excel to reterive symbols C:\Zerodha\Pi\LinkExcel
     #indexname is stockindexs name retrieved from symbols directory using selector variable
     selector = 3
     indexname = str(listIndex(selector))
     print(indexname)
     stock_symbols = stockSymbols(indexname)
-    symbolsSheet(sheetService, stock_symbols, indexname)
-
-    #insert_permission(service = driveService, file_id = '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg', permission_type = 'anyone', role = 'writer')
-    #getSheet(sheetService, '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg')
-    #writeSheet(service=sheetService, spreadSheetId = '1HBbxqzPvGmv6ml4uxH4ZK6d3ac3n59AecJoQ7oaUZYg')
+    symbolsSheet(sheetService, stock_symbols, indexname
+    """
 
 if __name__ == "__main__":
         main()
