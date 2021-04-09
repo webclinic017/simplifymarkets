@@ -12,9 +12,11 @@ from pathlib import Path
 import time
 import json
 import re
+import csv
+import sys
 
 # LIST all the FILES
-def retrieve_all_files(service):
+def getAllSheets(driveService):
     result = []
     page_token = None
     while True:
@@ -22,7 +24,7 @@ def retrieve_all_files(service):
             param = {}
             if page_token:
                param['pageToken'] = page_token
-            files = service.files().list(**param).execute()
+            files = driveService.files().list(**param).execute()
             result.extend(files['items'])
             page_token = files.get('nextPageToken')
             if not page_token:
@@ -53,13 +55,13 @@ def getSheet(service, spreadsheet_id, ranges = [], include_grid_data = False):
     print(response)
 
 # CREATE
-def createSheet(service):
+def createSheet(sheetService):
     sheet = {
         'properties': {
         'title': "STOCK_DATA"
         }
     }
-    spreadSheet = service.spreadsheets().create(body=sheet, fields='spreadsheetId').execute()
+    spreadSheet = sheetService.spreadsheets().create(body=sheet, fields='spreadsheetId').execute()
     spreadSheetId = str(spreadSheet.get('spreadsheetId'))
     print('Spreadsheet ID: {0}'.format(spreadSheetId))
     return spreadSheetId
@@ -67,95 +69,82 @@ def createSheet(service):
 # WRITE 
 def writeSheet(service, spreadSheetId, symbol):
     values = [
-        ['=GOOGLEFINANCE('+symbol+', "ALL", "01/01/1970", TODAY())']
+        ['=GOOGLEFINANCE("'+symbol+'", "ALL", "01/01/1970", TODAY())']
     ]
     body = {
         'values' : values
     }
     range_name = 'Sheet1!A1:A1'
     result = service.spreadsheets().values().update(spreadsheetId=spreadSheetId, range=range_name, valueInputOption='USER_ENTERED', body=body).execute()
-    #print('{0} cells updated.'.format(result.get('updatedCells')))
+    print('writeSheet {0} cells updated.'.format(result.get('updatedCells')))
 
 # DELETE
 def deleteSheet(service, spreadSheetId):
     service.files().delete(fileId=spreadSheetId).execute()
 
-def stockSymbols(selector):
-    SYMBOLS_PATH_excel = "symbols"
-    xlsx_file = Path(SYMBOLS_PATH_excel, selector)
-    print(xlsx_file)
-    wb_obj = openpyxl.load_workbook(xlsx_file)
-    # Read the active sheet:
-    sheet = wb_obj.active
-    symbols = sheet.max_row
-    print(symbols)
-    stock_symbols = []
-    for i in range(2, symbols + 1):
-        raw_symbol = "A" + str(i)
-        raw_data = sheet[raw_symbol].value
-        raw_data = raw_data.split(", ")[1]
-        raw_data = raw_data.split('"')[1]
-        raw_data = raw_data.split('_')[1]
-        raw_data = raw_data.split('-')[0]
-        stock_symbols.insert(i, raw_data)
-    return stock_symbols
+# LIST all SYMBOLS - NSE
+def getSymbols():
+    #print(os.curdir)
+    SYMBOLS_PATH = os.getcwd() + '/resources/symbols.csv'
+    symbolsList = []
+    with open(SYMBOLS_PATH, 'r') as file:
+        reader = csv.reader(file)
+        rowCount = 0
+        for row in reader:
+            if rowCount == 0:
+                rowCount += 1
+                continue
+            symbolsList.append(row[0])
+    #print(sys.getsizeof(symbolsList)/(1024))
+    return symbolsList
 
+# WRITE the Index to file
+def writeIndex(index):
+    filename = 'index.json'
+    fileObj = open(filename, "w")
+    json.dump(index, fileObj)
+    fileObj.close()
 
-def json_writer(thisdict, index):
-    filename = index + ".json"
-    a_file = open(filename, "w")
-    json.dump(thisdict, a_file)
-    a_file.close()
+# CREATE the SHEET with FORMULA for every SYMBOL and write the index(symbol, spreadSheetId)
+def bootstrapStocksData(sheetService):
+    symbolsList = getSymbols()
+    index = {}
 
-    a_file = open(filename, "r")
-    output = a_file.read()
-    print(output)
-    a_file.close()
-
-def listIndex(selectIndex):
-    index = ["BSEAuto MW.xlsx","BSEFMC MW.xlsx", "BSEIT MW.xlsx", "BSEMetal MW.xlsx", "BSEOnG MW.xlsx", "BSEPower MW.xlsx","BSERealty MW.xlsx", "Nifty50 MW.xlsx","NiftyAuto MW.xlsx","NiftyBank MW.xlsx","NiftyCommodities MW.xlsx", "NiftyConsumption MW.xlsx", "NiftyEnergy MW.xlsx","NiftyFMCG MW.xlsx","NiftyInfra MW.xlsx", "NiftyIT MW.xlsx","NiftyMedia MW.xlsx","NiftyMetal MW.xlsx","NiftyMidCap50 MW.xlsx","NiftyMNC MW.xlsx","NiftyNext50 MW.xlsx","NiftyPharma MW.xlsx","NiftyPSE MW.xlsx","NiftyPSUBank MW.xlsx","NiftyRealty MW.xlsx","NiftyServSector MW.xlsx"]
-    return index[selectIndex]
-
-def symbolsSheet(sheetService, stock_symbols, indexname):
-    thisdict = {}
-    for i in range(len(stock_symbols)):
+    for i in range(len(symbolsList)):
         spreadSheetId = createSheet(sheetService)
-        time.sleep(4)
-        writeSheet(sheetService, spreadSheetId, indexname)
-        thisdict[stock_symbols[i]] = spreadSheetId
-        json_writer(thisdict,indexname)
-    return thisdict
+        time.sleep(1)
+        writeSheet(sheetService, spreadSheetId, symbolsList[i])
+        index[symbolsList[i]] = spreadSheetId
+
+    writeIndex(index)
 
 # DELETE ALL the Sheets
-def resetDatabase(driveService):
-    allSheets = retrieve_all_files(driveService)
+def resetStockData(driveService):
+    allSheets = getAllSheets(driveService)
     for i in range(len(allSheets)):
         deleteSheet(driveService, allSheets[i]['id'])
 
 def main():
-    SCOPES = ['https://www.googleapis.com/auth/sqlservice.admin', 
+    SCOPES = [
+          'https://www.googleapis.com/auth/sqlservice.admin',
           'https://www.googleapis.com/auth/spreadsheets',
           'https://www.googleapis.com/auth/drive.file',
-          'https://www.googleapis.com/auth/drive']
+          'https://www.googleapis.com/auth/drive'
+    ]
     SERVICE_ACCOUNT_FILE = 'sheetkey.json'
     creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
     sheetService = build('sheets', 'v4', credentials=creds)
     driveService = build('drive', 'v2', credentials=creds)
 
-    """
-    #link to excel to reterive symbols C:\Zerodha\Pi\LinkExcel
-    #indexname is stockindexs name retrieved from symbols directory using selector variable
-    selector = 3
-    indexname = str(listIndex(selector))
-    print(indexname)
-    stock_symbols = stockSymbols(indexname)
-    symbolsSheet(sheetService, stock_symbols, indexname
-    """
+    resetStockData(driveService)
+
+    #bootstrapStocksData(sheetService)
+    #insert_permission(driveService, '1nCwDnGWuH7kyq5H5Un8v3LKzb7ntFDvMGMLCyxTtPGQ')
+    #getSheet(sheetService, '1nCwDnGWuH7kyq5H5Un8v3LKzb7ntFDvMGMLCyxTtPGQ')
 
 if __name__ == "__main__":
         main()
-
 
 """
 def downloadFile(service):
