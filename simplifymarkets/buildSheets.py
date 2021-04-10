@@ -36,6 +36,7 @@ def getAllSheets(driveService):
     for i in range(len(result)):
         print(result[i]['id'])
     print('\n\n')
+    
     return result
 
 # Make file PUBLIC
@@ -79,12 +80,11 @@ def writeSheet(service, spreadSheetId, symbol):
     print('writeSheet {0} cells updated.'.format(result.get('updatedCells')))
 
 # DELETE
-def deleteSheet(service, spreadSheetId):
-    service.files().delete(fileId=spreadSheetId).execute()
+def deleteSheet(driveService, spreadSheetId):
+    driveService.files().delete(fileId=spreadSheetId).execute()
 
 # LIST all SYMBOLS - NSE
 def getSymbols():
-    #print(os.curdir)
     SYMBOLS_PATH = os.getcwd() + '/resources/symbols.csv'
     symbolsList = []
     with open(SYMBOLS_PATH, 'r') as file:
@@ -95,7 +95,6 @@ def getSymbols():
                 rowCount += 1
                 continue
             symbolsList.append(row[0])
-    #print(sys.getsizeof(symbolsList)/(1024))
     return symbolsList
 
 # WRITE the Index to file
@@ -110,19 +109,28 @@ def bootstrapStocksData(sheetService):
     symbolsList = getSymbols()
     index = {}
 
-    for i in range(len(symbolsList)):
-        spreadSheetId = createSheet(sheetService)
-        time.sleep(1)
-        writeSheet(sheetService, spreadSheetId, symbolsList[i])
-        index[symbolsList[i]] = spreadSheetId
+    try:
+        for i in range(len(symbolsList)):
+            time.sleep(8)
+            print(str(i+1)+' ', end="")
+            spreadSheetId = createSheet(sheetService)
+            #writeSheet(sheetService, spreadSheetId, symbolsList[i])
+    except:
+        #writeIndex(index)
+        print('Index Created till : '+i)
 
+    """
+    index[symbolsList[i]] = spreadSheetId 
     writeIndex(index)
+    """
 
 # DELETE ALL the Sheets
 def resetStockData(driveService):
     allSheets = getAllSheets(driveService)
     for i in range(len(allSheets)):
+        print('Deleting : '+allSheets[i]['id'])
         deleteSheet(driveService, allSheets[i]['id'])
+    print('\n\n')
 
 def main():
     SCOPES = [
@@ -137,16 +145,12 @@ def main():
     sheetService = build('sheets', 'v4', credentials=creds)
     driveService = build('drive', 'v2', credentials=creds)
 
-    resetStockData(driveService)
-
-    #bootstrapStocksData(sheetService)
-    #insert_permission(driveService, '1nCwDnGWuH7kyq5H5Un8v3LKzb7ntFDvMGMLCyxTtPGQ')
-    #getSheet(sheetService, '1nCwDnGWuH7kyq5H5Un8v3LKzb7ntFDvMGMLCyxTtPGQ')
+    print(len(getAllSheets(driveService)))
 
 if __name__ == "__main__":
         main()
 
-"""
+"""cls
 def downloadFile(service):
     file_id = '1XucNbcohP3Z_e8kYcL9odGlE1Qx_vFGyCeNYQhLVDgk'
     request = service.files().get_media(fileId=file_id)
