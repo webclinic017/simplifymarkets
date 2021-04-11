@@ -15,29 +15,8 @@ import re
 import csv
 import sys
 
-# LIST all the FILES
-def getAllSheets(driveService):
-    result = []
-    page_token = None
-    while True:
-        try:
-            param = {}
-            if page_token:
-               param['pageToken'] = page_token
-            files = driveService.files().list(**param).execute()
-            result.extend(files['items'])
-            page_token = files.get('nextPageToken')
-            if not page_token:
-                break
-        except errors.HttpError:
-            #print('An error occurred: %s' % error)
-            break
-    
-    for i in range(len(result)):
-        print(result[i]['id'])
-    print('\n\n')
-    
-    return result
+from googleServices.GoogleService import GoogleService
+from googleServices.DriveService import DriveService
 
 # Make file PUBLIC
 def insert_permission(service, file_id, value = '', permission_type = 'anyone', role = 'writer'):
@@ -132,32 +111,14 @@ def resetStockData(driveService):
         deleteSheet(driveService, allSheets[i]['id'])
     print('\n\n')
 
+
 def main():
-    SCOPES = [
-          'https://www.googleapis.com/auth/sqlservice.admin',
-          'https://www.googleapis.com/auth/spreadsheets',
-          'https://www.googleapis.com/auth/drive.file',
-          'https://www.googleapis.com/auth/drive'
-    ]
-    SERVICE_ACCOUNT_FILE = 'sheetkey.json'
-    creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    googleService = GoogleService('', 'sheetkey.json')
+    driveService = DriveService(googleService.getDriveService())
 
-    sheetService = build('sheets', 'v4', credentials=creds)
-    driveService = build('drive', 'v2', credentials=creds)
+    driveService.getAllFiles()
 
-    print(len(getAllSheets(driveService)))
+
 
 if __name__ == "__main__":
         main()
-
-"""cls
-def downloadFile(service):
-    file_id = '1XucNbcohP3Z_e8kYcL9odGlE1Qx_vFGyCeNYQhLVDgk'
-    request = service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while done is False:
-        status, done = downloader.next_chunk()
-        print("Download %d%%." % int(status.progress() * 100))
-"""

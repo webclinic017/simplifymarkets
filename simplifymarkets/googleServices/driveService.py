@@ -2,16 +2,16 @@ class DriveService:
 
     """ class for google drive functions """
 
-    driveService = None
+    service = None
 
-    # Class Constructor
+    # Constructor
     def __init__(self, driveService):
 
-        if driveService == None:
-            DriveService.driveService = driveService
+        if DriveService.service == None:
+            DriveService.service = driveService
 
     # Returns list of all files
-    def getAllFiles(self):
+    def getAllFiles(self, show = True):
 
         result = []
         pageToken = None
@@ -21,7 +21,7 @@ class DriveService:
                 param = {}
                 if pageToken:
                     param['pageToken'] = pageToken
-                files = driveService.files().list(**param).execute()
+                files = DriveService.service.files().list(**param).execute()
                 result.extend(files['items'])
                 pageToken = files.get('nextPageToken')
                 if not pageToken:
@@ -29,6 +29,13 @@ class DriveService:
             except:
                 #print('An error occurred: %s' % error)
                 break
+
+        if show == True:
+            print('Total Files : ' + str(len(result)))
+
+        #for i in range(len(result)):
+            #print(result[i]['id'])
+        #print('\n\n')
 
         return result
 
@@ -41,9 +48,9 @@ class DriveService:
             'role' : role
         }
 
-        return driveService.permissions().insert(fileId = fileId, body = newPermission).execute()
+        return DriveService.service.permissions().insert(fileId = fileId, body = newPermission).execute()
 
     # Delete a file
     def deleteSheet(self, fileId):
 
-        driveService.files().delete(fileId=fileId).execute()
+        DriveService.service.files().delete(fileId=fileId).execute()
