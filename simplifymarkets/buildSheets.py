@@ -17,15 +17,8 @@ import sys
 
 from googleServices.GoogleService import GoogleService
 from googleServices.DriveService import DriveService
-
-# Make file PUBLIC
-def insert_permission(service, file_id, value = '', permission_type = 'anyone', role = 'writer'):
-    new_permission = {
-        'value' : value,
-        'type' : permission_type,
-        'role' : role
-    }
-    return service.permissions().insert(fileId = file_id, body = new_permission).execute()
+from utility.Common import * 
+from utility.File import *
 
 # GET
 def getSheet(service, spreadsheet_id, ranges = [], include_grid_data = False):
@@ -113,11 +106,13 @@ def resetStockData(driveService):
 
 
 def main():
+    commonUtil = Common()
+    fileUtil = File()
     googleService = GoogleService('', 'sheetkey.json')
     driveService = DriveService(googleService.getDriveService())
 
-    driveService.getAllFiles()
-
+    reader = fileUtil.readFile(os.getcwd() + '/resources', 'symbols.csv')
+    commonUtil.sizeOf(reader)
 
 
 if __name__ == "__main__":
