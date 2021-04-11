@@ -11,7 +11,7 @@ class DriveService:
             DriveService.service = driveService
 
     # Returns list of all files
-    def getAllFiles(self, show = True):
+    def get_all_files(self, show = True):
 
         result = []
         pageToken = None
@@ -40,7 +40,7 @@ class DriveService:
         return result
 
     # Make file PUBLIC
-    def insertPermission(self, fileId, value = '', permissionType = 'anyone', role = 'writer'):
+    def insert_permission(self, fileId, value = '', permissionType = 'anyone', role = 'writer'):
         
         newPermission = {
             'value' : value,
@@ -51,6 +51,6 @@ class DriveService:
         return DriveService.service.permissions().insert(fileId = fileId, body = newPermission).execute()
 
     # Delete a file
-    def deleteSheet(self, fileId):
+    def delete_sheet(self, fileId):
 
         DriveService.service.files().delete(fileId=fileId).execute()

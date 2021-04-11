@@ -23,13 +23,13 @@ class GoogleService:
         self.credentials = service_account.Credentials.from_service_account_file(path + keyFileName, scopes = self.scopes)
 
     # Get Service object
-    def _getService(self, serviceName, version):
+    def _get_service(self, serviceName, version):
         return build(serviceName, version, credentials = self.credentials)
 
     # Get DriveService
-    def getDriveService(self):
-        return self._getService(self.DRIVE, 'v2')
+    def get_drive_service(self):
+        return self._get_service(self.DRIVE, 'v2')
 
     # Get SheetService
-    def getSheetService(self):
-        return self._getService(self.SHEETS, 'v4')
+    def get_sheets_service(self):
+        return self._get_service(self.SHEETS, 'v4')

@@ -10,7 +10,7 @@ class File:
         super().__init__()
 
     # Read file and return object
-    def readFile(self, path, fileName, permission = 'r'):
+    def read_file(self, path, fileName, permission = 'r'):
 
         fileAbsoluteName = path + fileName
 
@@ -24,7 +24,7 @@ class File:
         return rows
 
     # Write file
-    def writeFile(self, fileName, extension, permission, data):
+    def write_file(self, fileName, extension, permission, data):
         
         fileObj = open(fileName + '.' + extension, permission)
         json.dump(data, fileObj)
