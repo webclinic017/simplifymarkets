@@ -12,7 +12,7 @@ class File:
     # Read file and return object
     def readFile(self, path, fileName, permission = 'r'):
 
-        fileAbsoluteName = path + '/' + fileName
+        fileAbsoluteName = path + fileName
 
         with open(fileAbsoluteName, permission) as file:
             reader = csv.reader(file)
@@ -23,6 +23,7 @@ class File:
 
         return rows
 
+    # Write file
     def writeFile(self, fileName, extension, permission, data):
         
         fileObj = open(fileName + '.' + extension, permission)
