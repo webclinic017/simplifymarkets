@@ -10,7 +10,7 @@ class SheetsService:
             SheetsService.service = sheetService
 
     # Get the sheet
-    def getSheet(self, spreadsheetId, ranges = [], include_grid_data = False, show = True):
+    def get_sheet(self, spreadsheetId, ranges = [], include_grid_data = False, show = True):
 
         request = SheetsService.service.spreadsheets().get(spreadsheetId=spreadsheetId, ranges = ranges, includeGridData = include_grid_data)
         response = request.execute()
@@ -20,7 +20,7 @@ class SheetsService:
 
 
     # CREATE
-    def createSheet(self, show = True):
+    def create_sheet(self, show = True):
 
         sheet = {
             'properties': {
@@ -38,7 +38,7 @@ class SheetsService:
 
 
     # WRITE
-    def writeSheet(self, spreadSheetId, symbol):
+    def write_sheet(self, spreadSheetId, symbol):
         values = [
             ['=GOOGLEFINANCE("'+symbol+'", "ALL", "01/01/1970", TODAY())']
         ]
