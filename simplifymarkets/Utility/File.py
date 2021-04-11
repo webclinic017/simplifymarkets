@@ -16,8 +16,12 @@ class File:
 
         with open(fileAbsoluteName, permission) as file:
             reader = csv.reader(file)
+            rows = []
+            for row in reader:
+                rows.append(row)
             file.close()
-            return reader
+
+        return rows
 
     def writeFile(self, fileName, extension, permission, data):
         
