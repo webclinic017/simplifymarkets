@@ -108,12 +108,11 @@ def resetStockData(driveService):
 def main():
     commonUtil = Common()
     fileUtil = File()
-    googleService = GoogleService('', 'sheetkey.json')
+    googleService = GoogleService('utility/', 'secretKey.json')
     driveService = DriveService(googleService.getDriveService())
 
-    reader = fileUtil.readFile(os.getcwd() + '/resources', 'symbols.csv')
+    reader = fileUtil.readFile(os.getcwd() + '/resources/', 'symbols.csv')
     commonUtil.sizeOf(reader)
-
 
 if __name__ == "__main__":
         main()

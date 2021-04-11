@@ -9,7 +9,7 @@ class GoogleService:
     SHEETS = 'sheets'
 
     # Constructor
-    def __init__(self, path, fileName):
+    def __init__(self, path, keyFileName):
 
         self.scopes = [
           'https://www.googleapis.com/auth/sqlservice.admin',
@@ -19,8 +19,8 @@ class GoogleService:
         ]
 
         self.path = path
-        self.fileName = fileName
-        self.credentials = service_account.Credentials.from_service_account_file(path + fileName, scopes = self.scopes)
+        self.keyFileName = keyFileName
+        self.credentials = service_account.Credentials.from_service_account_file(path + keyFileName, scopes = self.scopes)
 
     # Get Service object
     def _getService(self, serviceName, version):
