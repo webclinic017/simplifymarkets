@@ -15,13 +15,14 @@
     </div>
 
     <div class="button_holder">
-        <button class="btn_header">Backtest</button>
-        <button class="btn_header">Scanner</button>
+        <button>backtest</button>
+        <button>scanner</button>
     </div>
 
     <div class="main">
-        <div class="symbol_time">
-            <div class="style_symbol_time">
+
+        <div class="div3">
+            <div class="symbol_time">
                 <label>Symbol : </label>
                 <input type="text" placeholder="ITC">
                 <select>
@@ -32,13 +33,38 @@
             </div>
         </div>
         
-        <br><br>
-        <label>Order Type : </label>
+        <div class="div4">
+            <div class="order_type">
+                <label>Order Type : </label>
+                <select>
+                    <option label="BUY">1</option>
+                    <option label="SELL">2</option>
+                </select>
+                <input type="text" placeholder="No. of shares">
+            </div>
+        </div>
 
-        <select id="Order ">
-            <option label="BUY">1</option>
-            <option label="SELL">2</option>
-        </select>
+        <div class="div5">
+            <div class="order_type">
+                <label>Entry :</label>
+                <select>
+                    <option label="Exponential Moving average (EMA)">1</option>
+                    <option label="Simple moving average (SMA)">2</option>
+                </select>
+                <select>
+                    <option label="go below">1</option>
+                    <option label="equals">2</option>
+                    <option label="smaller than">3</option>
+                    <option label="greater than">4</option>
+                    <option label="go above">5</option>
+                </select>
+                <select>
+                    <option label="Exponential Moving average (EMA)">1</option>
+                    <option label="Simple moving average (SMA)">2</option>
+                </select>
+            </div>
+        </div>
+
     </div>
 
 </body>
