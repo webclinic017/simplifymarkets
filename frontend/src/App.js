@@ -43,8 +43,6 @@ function App() {
         </Paper>
       </div>
     </div>
-  );
 }
 
 export default App;
-
