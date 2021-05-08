@@ -7,3 +7,4 @@ google-services-api
 backtrader
 django
 djangorestframework
+requests
