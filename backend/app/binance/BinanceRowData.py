@@ -1,4 +1,4 @@
-import time
+import time, datetime
 
 """ Class to handle the response data from Binance. """
 class BinanceRowData:
@@ -19,4 +19,15 @@ class BinanceRowData:
         self.taker_buy_base_vol = row[9]
         self.taker_buy_quote_vol = row[10]
 
-    
+    @staticmethod
+    def convert_epoch_to_datetime(epoch_time, ms = True):
+        if ms == True:
+            epoch_time = epoch_time/1000.0
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
+
+    @staticmethod
+    def convert_datetime_to_epoch(date_time, ms = True):
+        seconds = int(time.mktime(datetime.datetime.strptime(date_time, "%Y-%m-%d").timetuple()))
+        if ms == True:
+            return seconds * 1000
+        return seconds
