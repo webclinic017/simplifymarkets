@@ -1,12 +1,13 @@
+from BinanceRowData import *
 import requests
 import time
 from enum import Enum
-from BinanceRowData import *
 import json
 
 """  """
 class Interval(str, Enum):
     ONE_MINUTE = '1m'
+    ONE_HOUR = '1h'
     ONE_DAY = '1d'
     ONE_WEEK = '1w'
     ONE_MONTH = '1M'
@@ -25,7 +26,7 @@ class BinanceDataFeed:
 
     """ Class constructor. """
     def __init__(self):
-        #self.__set_symbols()
+        self.__set_symbols()
         print()
 
     """ Retrieve data about specific cryptocurrency pair. """
@@ -92,3 +93,28 @@ class BinanceDataFeed:
         # print(binance_row_data.volume)
         # print(binance_row_data.close_time)
 
+
+if __name__ == '__main__':
+
+    df = BinanceDataFeed()
+    data = df.get_price_data(
+        symbol = 'MATICUSDT', 
+        interval = Interval.ONE_DAY
+    )
+
+    for blob in data:
+        for row in blob:
+            row = BinanceRowData(row)
+            BinanceDataFeed.print_row_data(row)
+    
+    for symbol in BinanceDataFeed.symbols:
+        print(symbol)
+
+    # monthly_data = df.get_price_data('BTCUSDT', interval = Interval.ONE_MONTH, limit = 20)
+    # start_time = BinanceRowData(monthly_data[0]).raw_open_time
+    # print(start_time)
+    
+    #print(BinanceRowData.convert_epoch_to_datetime(1620498600000))
+    
+        # start_time = BinanceRowData.convert_datetime_to_epoch('2018-01-01'),
+        # end_time = BinanceRowData.convert_datetime_to_epoch('2018-01-02'),

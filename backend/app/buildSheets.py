@@ -47,42 +47,42 @@ def build_sheets():
         failed_symbol = symbol
 
 
+
 def analysis():
     database_index = open(os.getcwd() + '/resources/'+'database_index.json') 
     database_index = json.load(database_index)
 
-    #print(sheetsService.get_sheet(database_index['DRREDDY']))
-    #driveService.insert_permission(database_index['DRREDDY'])
-    print(len(sheetsService.read_sheet(database_index['TCS'])))
+    failed_symbols = []
+    processing = {}
 
-    print(commonUtil.sizeOf(sheetsService.read_sheet(database_index['TCS'])))
+    for symbol in database_index:
 
-    return
-    CLOSE = 4
-    flag = False
-    stop_symbol = 'ZEELEARN'
-
-    try:
-        for symbol in database_index:
-            if symbol == stop_symbol:
-                flag = True
-            
-            if flag == True:
+        retry = 3
+        while retry > 0:
+            retry -= 1
+            try:
                 stock_data = sheetsService.read_sheet(database_index[symbol])
-                #print(stock_data)
-                total_days = len(stock_data)-1
-                curr_price = float(stock_data[total_days][CLOSE])
-                first_price = float(stock_data[1][CLOSE])
-                cagr = find_CAGR(first_price, curr_price, total_days)
-                years = total_days/252.0
+            except:
+                if retry == 0:
+                    print('Error: ' + symbol)
+                    failed_symbols.append(symbol)
 
-                if cagr >  5:
-                    print(symbol + " : "  + str(find_CAGR(first_price, curr_price, total_days)) + " % , " + str(total_days/252.0) + ' years')
-                    time.sleep(3)
-                else:
-                    time.sleep(8)
-    except:
-        print('Break at : ' + symbol)
+        CLOSE = 4
+        total_days = len(stock_data)-1
+        curr_price = float(stock_data[total_days][CLOSE])
+        first_price = float(stock_data[1][CLOSE])
+        cagr = round(find_CAGR(first_price, curr_price, total_days), 2)
+        years = round(total_days/252.0, 2)
+
+        if cagr >  5:
+            # WRITE TO KNOWLEDGE DB
+            #print(symbol + " : "  + str(cagr) + " % , " + str(total_days/252.0) + ' years')
+            s = '|    {0:<16} | {1:>8} %    |    {2:>8} Y    |'.format(symbol, cagr, years)
+            print(s)
+            time.sleep(3)
+        else:
+            time.sleep(8)
+
             
 
 def main():
@@ -95,16 +95,16 @@ if __name__ == "__main__":
 
 
 """
-            write = symbol + " : "  + str(find_CAGR(first_price, curr_price, total_days)) + " % , " + str(total_days/252.0) + ' years'
-            filter_symbol[symbol] = write
-            fileUtil.write_file(filter_symbol, os.getcwd() + '/resources/', 'filter_symbols', 'json')
-            
+write = symbol + " : "  + str(find_CAGR(first_price, curr_price, total_days)) + " % , " + str(total_days/252.0) + ' years'
+filter_symbol[symbol] = write
+fileUtil.write_file(filter_symbol, os.getcwd() + '/resources/', 'filter_symbols', 'json')
 
-            if cagr < 5:
-                filter_symbol.append(symbol)
-                fileUtil.write_file(filter_symbol, os.getcwd() + '/resources/', 'filter_symbols', 'json')
-                time.sleep(8)
-                continue
+
+if cagr < 5:
+    filter_symbol.append(symbol)
+    fileUtil.write_file(filter_symbol, os.getcwd() + '/resources/', 'filter_symbols', 'json')
+    time.sleep(8)
+    continue
 ORCHPHARMA
 reader = fileUtil.read_file(os.getcwd() + '/resources/', 'symbols_nse.csv')
 #print(len(reader))
