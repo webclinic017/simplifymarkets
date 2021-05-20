@@ -1,4 +1,4 @@
-import sys
+import sys, json, os
 
 class Common:
 
@@ -17,3 +17,7 @@ class Common:
             print(('%.2f ' + suffix) % size)
         return size
 
+def get_stockdb_index():
+    database_index = open(os.getcwd() + '/resources/'+'database_index.json') 
+    database_index = json.load(database_index)
+    return database_index
