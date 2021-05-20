@@ -24,5 +24,7 @@ class employeeList(APIView):
         result = employeesSerializer(employees1, many = True)
         return Response(result.data)
 
+    """
     def post(self):
         return 
+    """

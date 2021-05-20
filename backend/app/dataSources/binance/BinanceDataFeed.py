@@ -26,7 +26,6 @@ class BinanceDataFeed:
     """ Class constructor. """
     def __init__(self):
         self.__set_symbols()
-        print()
 
     """ Retrieve data about specific cryptocurrency pair. """
     def get_price_data(self, symbol, interval = '1d', start_time = None, end_time = None, limit = 1000):
