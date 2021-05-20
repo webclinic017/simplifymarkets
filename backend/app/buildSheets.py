@@ -29,7 +29,6 @@ def build_sheets():
     with open(os.getcwd() + '/resources/'+'database_index.json') as json_file:
         database_index = json.load(json_file)
     
-
     try:
         flag = False
         failed_symbol = 'UJJIVANSFB'
@@ -53,8 +52,12 @@ def analysis():
     database_index = json.load(database_index)
 
     failed_symbols = []
-    processing = {}
 
+
+    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+    header = '|    {0:<16} |    {1}   |        {2}    |'.format('SYMBOL', 'CAGR (%)', '#YEARS')
+    print(header)
+    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
     for symbol in database_index:
 
         retry = 3
@@ -67,22 +70,25 @@ def analysis():
                     print('Error: ' + symbol)
                     failed_symbols.append(symbol)
 
-        CLOSE = 4
-        total_days = len(stock_data)-1
-        curr_price = float(stock_data[total_days][CLOSE])
-        first_price = float(stock_data[1][CLOSE])
-        cagr = round(find_CAGR(first_price, curr_price, total_days), 2)
-        years = round(total_days/252.0, 2)
+        try:
+            CLOSE = 4
+            total_days = len(stock_data)-1
+            curr_price = float(stock_data[total_days][CLOSE])
+            first_price = float(stock_data[1][CLOSE])
+            cagr = round(find_CAGR(first_price, curr_price, total_days), 2)
+            years = round(total_days/252.0, 2)
 
-        if cagr >  5:
-            # WRITE TO KNOWLEDGE DB
-            #print(symbol + " : "  + str(cagr) + " % , " + str(total_days/252.0) + ' years')
-            s = '|    {0:<16} | {1:>8} %    |    {2:>8} Y    |'.format(symbol, cagr, years)
-            print(s)
-            time.sleep(3)
-        else:
-            time.sleep(8)
+            if cagr >  5:
+                # WRITE TO KNOWLEDGE DB
+                message = '|    {0:<16} | {1:>8} %    |    {2:>8} Y    |'.format(symbol, cagr, years)
+                print(message)
+                time.sleep(3)
+            else:
+                time.sleep(8)
+        except Exception as e:
+            print(e)
 
+    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
             
 
 def main():
@@ -126,14 +132,6 @@ for row in reader:
     i = i + 1
 
 fileUtil.write_file(database_index, os.getcwd() + '/resources/', 'database_index', 'json')
-
-#print(len(allfiles))
-for i in range(184):
-    sheetsService.create_sheet()
-    time.sleep(8)
-
-#print(len(driveService.get_all_files()))
-#commonUtil.sizeOf(reader)
 """
 #testing my changes
 

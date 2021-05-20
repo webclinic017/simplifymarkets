@@ -4,7 +4,6 @@ import time
 from enum import Enum
 import json
 
-"""  """
 class Interval(str, Enum):
     ONE_MINUTE = '1m'
     ONE_HOUR = '1h'
