@@ -3,8 +3,11 @@ from . models import employee
 from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from . dataSources.gFinance.StockDataFeed import StockDataFeed
 
 def index(request):
+    sf = StockDataFeed()
+    print(sf.symbol_table)
     return HttpResponse("Awesome!")
 
 """
