@@ -1,0 +1,488 @@
+{
+    "EICHERMOT": {
+        "highest_price": 3286.2,
+        "hp_datetime": "9/7/2017 15:30:00",
+        "perc_change_from_high": -23.25,
+        "number_of_days": 913
+    },
+    "GRASIM": {
+        "highest_price": 1454.5,
+        "hp_datetime": "4/1/2021 15:30:00",
+        "perc_change_from_high": -5.68,
+        "number_of_days": 32
+    },
+    "TCS": {
+        "highest_price": 3322.25,
+        "hp_datetime": "4/9/2021 15:30:00",
+        "perc_change_from_high": -7.28,
+        "number_of_days": 27
+    },
+    "WHIRLPOOL": {
+        "highest_price": 2681.45,
+        "hp_datetime": "1/21/2021 15:30:00",
+        "perc_change_from_high": -21.04,
+        "number_of_days": 79
+    },
+    "JINDALSTEL": {
+        "highest_price": 750.05,
+        "hp_datetime": "10/6/2010 15:30:00",
+        "perc_change_from_high": -46.25,
+        "number_of_days": 2618
+    },
+    "LINDEINDIA": {
+        "highest_price": 1925.95,
+        "hp_datetime": "4/26/2021 15:30:00",
+        "perc_change_from_high": -14.5,
+        "number_of_days": 18
+    },
+    "NESTLEIND": {
+        "highest_price": 18732.7,
+        "hp_datetime": "12/23/2020 15:30:00",
+        "perc_change_from_high": -6.6,
+        "number_of_days": 99
+    },
+    "INFIBEAM": {
+        "highest_price": 119.5,
+        "hp_datetime": "9/17/2018 15:30:00",
+        "perc_change_from_high": -65.48,
+        "number_of_days": 658
+    },
+    "METROPOLIS": {
+        "highest_price": 2486.35,
+        "hp_datetime": "4/19/2021 15:30:00",
+        "perc_change_from_high": -8.17,
+        "number_of_days": 22
+    },
+    "TATACHEM": {
+        "highest_price": 819.45,
+        "hp_datetime": "4/8/2021 15:30:00",
+        "perc_change_from_high": -13.62,
+        "number_of_days": 28
+    },
+    "LALPATHLAB": {
+        "highest_price": 3336.55,
+        "hp_datetime": "4/12/2021 15:30:00",
+        "perc_change_from_high": -15.15,
+        "number_of_days": 26
+    },
+    "TIINDIA": {
+        "highest_price": 1264.95,
+        "hp_datetime": "4/29/2021 15:30:00",
+        "perc_change_from_high": -7.1,
+        "number_of_days": 15
+    },
+    "IEX": {
+        "highest_price": 401.55,
+        "hp_datetime": "5/11/2021 15:30:00",
+        "perc_change_from_high": -7.31,
+        "number_of_days": 7
+    },
+    "RELIANCE": {
+        "highest_price": 2324.55,
+        "hp_datetime": "9/16/2020 15:30:00",
+        "perc_change_from_high": -13.85,
+        "number_of_days": 166
+    },
+    "HAVELLS": {
+        "highest_price": 1216.15,
+        "hp_datetime": "2/16/2021 15:30:00",
+        "perc_change_from_high": -15.45,
+        "number_of_days": 62
+    },
+    "JSWSTEEL": {
+        "highest_price": 758.65,
+        "hp_datetime": "5/10/2021 15:30:00",
+        "perc_change_from_high": -7.97,
+        "number_of_days": 8
+    },
+    "DMART": {
+        "highest_price": 3286.1,
+        "hp_datetime": "3/5/2021 15:30:00",
+        "perc_change_from_high": -7.67,
+        "number_of_days": 49
+    },
+    "GUJGASLTD": {
+        "highest_price": 568.4,
+        "hp_datetime": "4/9/2021 15:30:00",
+        "perc_change_from_high": -9.92,
+        "number_of_days": 27
+    },
+    "HAL": {
+        "highest_price": 1293.6,
+        "hp_datetime": "8/14/2020 15:30:00",
+        "perc_change_from_high": -20.73,
+        "number_of_days": 189
+    },
+    "KOTAKBANK": {
+        "highest_price": 2019.65,
+        "hp_datetime": "2/16/2021 15:30:00",
+        "perc_change_from_high": -12.97,
+        "number_of_days": 62
+    },
+    "IGL": {
+        "highest_price": 569.05,
+        "hp_datetime": "2/11/2021 15:30:00",
+        "perc_change_from_high": -11.71,
+        "number_of_days": 65
+    },
+    "MANALIPETC": {
+        "highest_price": 84.65,
+        "hp_datetime": "5/11/2021 15:30:00",
+        "perc_change_from_high": -4.08,
+        "number_of_days": 7
+    },
+    "AARTIIND": {
+        "highest_price": 1786.0,
+        "hp_datetime": "5/6/2021 15:30:00",
+        "perc_change_from_high": -6.79,
+        "number_of_days": 10
+    },
+    "BATAINDIA": {
+        "highest_price": 1872.8,
+        "hp_datetime": "2/5/2020 15:30:00",
+        "perc_change_from_high": -20.73,
+        "number_of_days": 318
+    },
+    "SAIL": {
+        "highest_price": 287.75,
+        "hp_datetime": "12/12/2007 15:30:00",
+        "perc_change_from_high": -57.6,
+        "number_of_days": 3302
+    },
+    "ORIENTREF": {
+        "highest_price": 328.95,
+        "hp_datetime": "5/3/2021 15:30:00",
+        "perc_change_from_high": -5.2,
+        "number_of_days": 13
+    },
+    "GLENMARK": {
+        "highest_price": 1226.8,
+        "hp_datetime": "8/21/2015 15:30:00",
+        "perc_change_from_high": -50.5,
+        "number_of_days": 1415
+    },
+    "MFSL": {
+        "highest_price": 931.45,
+        "hp_datetime": "3/10/2021 15:30:00",
+        "perc_change_from_high": -3.08,
+        "number_of_days": 46
+    },
+    "RATNAMANI": {
+        "highest_price": 2024.35,
+        "hp_datetime": "4/6/2021 15:30:00",
+        "perc_change_from_high": -4.49,
+        "number_of_days": 30
+    },
+    "APCOTEXIND": {
+        "highest_price": 374.1,
+        "hp_datetime": "5/20/2021 15:30:00",
+        "perc_change_from_high": -3.23,
+        "number_of_days": 1
+    },
+    "MAXHEALTH": {
+        "highest_price": 235.65,
+        "hp_datetime": "4/20/2021 15:30:00",
+        "perc_change_from_high": -3.56,
+        "number_of_days": 21
+    },
+    "KAJARIACER": {
+        "highest_price": 999.7,
+        "hp_datetime": "3/12/2021 15:30:00",
+        "perc_change_from_high": -6.92,
+        "number_of_days": 45
+    },
+    "AARTIDRUGS": {
+        "highest_price": 1011.85,
+        "hp_datetime": "10/8/2020 15:30:00",
+        "perc_change_from_high": -25.95,
+        "number_of_days": 151
+    },
+    "WIPRO": {
+        "highest_price": 525.95,
+        "hp_datetime": "5/10/2021 15:30:00",
+        "perc_change_from_high": -2.52,
+        "number_of_days": 8
+    },
+    "DABUR": {
+        "highest_price": 575.0,
+        "hp_datetime": "4/16/2021 15:30:00",
+        "perc_change_from_high": -6.65,
+        "number_of_days": 23
+    },
+    "WESTLIFE": {
+        "highest_price": 524.3,
+        "hp_datetime": "3/10/2021 15:30:00",
+        "perc_change_from_high": -8.13,
+        "number_of_days": 46
+    },
+    "HDFC": {
+        "highest_price": 2860.45,
+        "hp_datetime": "2/15/2021 15:30:00",
+        "perc_change_from_high": -11.97,
+        "number_of_days": 63
+    },
+    "DIXON": {
+        "highest_price": 4267.25,
+        "hp_datetime": "3/19/2021 15:30:00",
+        "perc_change_from_high": -7.56,
+        "number_of_days": 40
+    },
+    "SUPPETRO": {
+        "highest_price": 729.65,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "LAURUSLABS": {
+        "highest_price": 491.75,
+        "hp_datetime": "5/11/2021 15:30:00",
+        "perc_change_from_high": -0.65,
+        "number_of_days": 7
+    },
+    "VOLTAS": {
+        "highest_price": 1103.2,
+        "hp_datetime": "2/11/2021 15:30:00",
+        "perc_change_from_high": -9.37,
+        "number_of_days": 65
+    },
+    "CENTURYPLY": {
+        "highest_price": 401.45,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "RADICO": {
+        "highest_price": 616.95,
+        "hp_datetime": "3/4/2021 15:30:00",
+        "perc_change_from_high": -4.49,
+        "number_of_days": 50
+    },
+    "FINEORG": {
+        "highest_price": 3508.4,
+        "hp_datetime": "5/20/2021 15:30:00",
+        "perc_change_from_high": -0.36,
+        "number_of_days": 1
+    },
+    "ITC": {
+        "highest_price": 342.5,
+        "hp_datetime": "7/3/2017 15:30:00",
+        "perc_change_from_high": -38.96,
+        "number_of_days": 959
+    },
+    "VINATIORGA": {
+        "highest_price": 1812.6,
+        "hp_datetime": "5/19/2021 15:30:00",
+        "perc_change_from_high": -0.87,
+        "number_of_days": 2
+    },
+    "JBCHEPHARM": {
+        "highest_price": 1455.6,
+        "hp_datetime": "5/7/2021 15:30:00",
+        "perc_change_from_high": -0.87,
+        "number_of_days": 9
+    },
+    "CADILAHC": {
+        "highest_price": 647.0,
+        "hp_datetime": "5/12/2021 15:30:00",
+        "perc_change_from_high": -5.23,
+        "number_of_days": 6
+    },
+    "SIEMENS": {
+        "highest_price": 2062.0,
+        "hp_datetime": "5/17/2021 15:30:00",
+        "perc_change_from_high": -3.67,
+        "number_of_days": 4
+    },
+    "VISAKAIND": {
+        "highest_price": 811.0,
+        "hp_datetime": "1/15/2018 15:30:00",
+        "perc_change_from_high": -16.41,
+        "number_of_days": 824
+    },
+    "GREENPLY": {
+        "highest_price": 388.95,
+        "hp_datetime": "1/11/2018 15:30:00",
+        "perc_change_from_high": -43.28,
+        "number_of_days": 826
+    },
+    "TATAELXSI": {
+        "highest_price": 3846.95,
+        "hp_datetime": "5/4/2021 15:30:00",
+        "perc_change_from_high": -7.3,
+        "number_of_days": 12
+    },
+    "BERGEPAINT": {
+        "highest_price": 810.8,
+        "hp_datetime": "1/11/2021 15:30:00",
+        "perc_change_from_high": -2.47,
+        "number_of_days": 87
+    },
+    "ICICIBANK": {
+        "highest_price": 673.95,
+        "hp_datetime": "2/15/2021 15:30:00",
+        "perc_change_from_high": -4.67,
+        "number_of_days": 63
+    },
+    "KPITTECH": {
+        "highest_price": 245.05,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "NAVINFLUOR": {
+        "highest_price": 3620.25,
+        "hp_datetime": "5/6/2021 15:30:00",
+        "perc_change_from_high": -11.64,
+        "number_of_days": 10
+    },
+    "HDFCBANK": {
+        "highest_price": 1626.65,
+        "hp_datetime": "2/16/2021 15:30:00",
+        "perc_change_from_high": -7.95,
+        "number_of_days": 62
+    },
+    "VEDL": {
+        "highest_price": 490.65,
+        "hp_datetime": "4/8/2010 15:30:00",
+        "perc_change_from_high": -44.23,
+        "number_of_days": 2745
+    },
+    "COSMOFILMS": {
+        "highest_price": 804.1,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "PIDILITIND": {
+        "highest_price": 1978.0,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "ASTRAL": {
+        "highest_price": 1905.98,
+        "hp_datetime": "3/15/2021 15:30:00",
+        "perc_change_from_high": -8.03,
+        "number_of_days": 44
+    },
+    "ADANIPORTS": {
+        "highest_price": 835.55,
+        "hp_datetime": "4/6/2021 15:30:00",
+        "perc_change_from_high": -7.94,
+        "number_of_days": 30
+    },
+    "FORTIS": {
+        "highest_price": 236.2,
+        "hp_datetime": "5/11/2021 15:30:00",
+        "perc_change_from_high": -3.68,
+        "number_of_days": 7
+    },
+    "PERSISTENT": {
+        "highest_price": 2408.45,
+        "hp_datetime": "5/19/2021 15:30:00",
+        "perc_change_from_high": -0.8,
+        "number_of_days": 2
+    },
+    "TATASTEEL": {
+        "highest_price": 1233.9,
+        "hp_datetime": "5/11/2021 15:30:00",
+        "perc_change_from_high": -9.79,
+        "number_of_days": 7
+    },
+    "SUNPHARMA": {
+        "highest_price": 1169.3,
+        "hp_datetime": "4/6/2015 15:30:00",
+        "perc_change_from_high": -40.96,
+        "number_of_days": 1512
+    },
+    "ATGL": {
+        "highest_price": 1339.7,
+        "hp_datetime": "5/18/2021 15:30:00",
+        "perc_change_from_high": -0.07,
+        "number_of_days": 3
+    },
+    "RELAXO": {
+        "highest_price": 1035.25,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "ADANITRANS": {
+        "highest_price": 1453.85,
+        "hp_datetime": "5/21/2021 15:30:00",
+        "perc_change_from_high": 0.0,
+        "number_of_days": 0
+    },
+    "ADANIENT": {
+        "highest_price": 1326.7,
+        "hp_datetime": "5/18/2021 15:30:00",
+        "perc_change_from_high": -0.87,
+        "number_of_days": 3
+    },
+    "DEEPAKNTR": {
+        "highest_price": 1904.1,
+        "hp_datetime": "5/3/2021 15:30:00",
+        "perc_change_from_high": -7.45,
+        "number_of_days": 13
+    },
+    "APOLLOHOSP": {
+        "highest_price": 3347.15,
+        "hp_datetime": "5/6/2021 15:30:00",
+        "perc_change_from_high": -2.97,
+        "number_of_days": 10
+    },
+    "DAAWAT": {
+        "highest_price": 109.05,
+        "hp_datetime": "1/8/2018 15:30:00",
+        "perc_change_from_high": -19.67,
+        "number_of_days": 829
+    },
+    "PIIND": {
+        "highest_price": 2741.5,
+        "hp_datetime": "5/18/2021 15:30:00",
+        "perc_change_from_high": -6.42,
+        "number_of_days": 3
+    },
+    "MINDTREE": {
+        "highest_price": 2248.35,
+        "hp_datetime": "5/6/2021 15:30:00",
+        "perc_change_from_high": -5.59,
+        "number_of_days": 10
+    },
+    "SBICARD": {
+        "highest_price": 1110.25,
+        "hp_datetime": "2/25/2021 15:30:00",
+        "perc_change_from_high": -4.15,
+        "number_of_days": 55
+    },
+    "CUB": {
+        "highest_price": 244.45,
+        "hp_datetime": "1/17/2020 15:30:00",
+        "perc_change_from_high": -28.39,
+        "number_of_days": 332
+    },
+    "TITAN": {
+        "highest_price": 1592.0,
+        "hp_datetime": "4/9/2021 15:30:00",
+        "perc_change_from_high": -3.37,
+        "number_of_days": 27
+    },
+    "CDSL": {
+        "highest_price": 879.45,
+        "hp_datetime": "5/19/2021 15:30:00",
+        "perc_change_from_high": -0.95,
+        "number_of_days": 2
+    },
+    "ADANIGREEN": {
+        "highest_price": 1313.65,
+        "hp_datetime": "3/23/2021 15:30:00",
+        "perc_change_from_high": -1.1,
+        "number_of_days": 38
+    },
+    "BEL": {
+        "highest_price": 189.0,
+        "hp_datetime": "11/29/2017 15:30:00",
+        "perc_change_from_high": -16.61,
+        "number_of_days": 856
+    }
+}

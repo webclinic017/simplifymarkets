@@ -8,3 +8,4 @@ backtrader
 django
 djangorestframework
 requests
+TA-Lib
