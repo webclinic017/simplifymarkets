@@ -28,9 +28,9 @@ class GoogleService:
     def get_drive_service(self):
         """ drive service wrapper. """
         service = build(DRIVE, 'v2', credentials=self.credentials)
-        return SheetsService(service)
+        return DriveService(service)
 
     def get_sheets_service(self):
         """ sheets service wrapper. """
         service = build(SHEETS, 'v4', credentials=self.credentials)
-        return DriveService(service)
+        return SheetsService(service)

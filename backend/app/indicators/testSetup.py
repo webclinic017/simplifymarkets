@@ -1,6 +1,7 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 import backtrader as bt
+from ..dataSources.gFinance import StockDataFeed
 
 if __name__ == '__main__':
     cerebro = bt.Cerebro()
