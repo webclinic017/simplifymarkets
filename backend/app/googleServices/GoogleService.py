@@ -1,35 +1,36 @@
+from django.conf import settings
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from . SheetsService import SheetsService
+from . DriveService import DriveService
+
+KEY = settings.BASE_DIR + '\\app\\resources\\secretKey.json'
+
+DRIVE = 'drive'
+
+SHEETS = 'sheets'
+
 
 class GoogleService:
+    """ Creates root service and get other gServices object. """
 
-    """ Core class to connect to google infrastructure and generate service objects. """
-
-    DRIVE = 'drive'
-    SHEETS = 'sheets'
-
-    # Constructor
-    def __init__(self, path, keyFileName):
-
+    def __init__(self):
         self.scopes = [
-          'https://www.googleapis.com/auth/sqlservice.admin',
-          'https://www.googleapis.com/auth/spreadsheets',
-          'https://www.googleapis.com/auth/drive.file',
-          'https://www.googleapis.com/auth/drive'
+            'https://www.googleapis.com/auth/sqlservice.admin',
+            'https://www.googleapis.com/auth/spreadsheets',
+            'https://www.googleapis.com/auth/drive.file',
+            'https://www.googleapis.com/auth/drive'
         ]
 
-        self.path = path
-        self.keyFileName = keyFileName
-        self.credentials = service_account.Credentials.from_service_account_file(path + keyFileName, scopes = self.scopes)
+        self.credentials = service_account.Credentials.from_service_account_file(
+            KEY, scopes=self.scopes)
 
-    # Get Service object
-    def _get_service(self, serviceName, version):
-        return build(serviceName, version, credentials = self.credentials)
-
-    # Get DriveService
     def get_drive_service(self):
-        return self._get_service(self.DRIVE, 'v2')
+        """ drive service wrapper. """
+        service = build(DRIVE, 'v2', credentials=self.credentials)
+        return DriveService(service)
 
-    # Get SheetService
     def get_sheets_service(self):
-        return self._get_service(self.SHEETS, 'v4')
+        """ sheets service wrapper. """
+        service = build(SHEETS, 'v4', credentials=self.credentials)
+        return SheetsService(service)
