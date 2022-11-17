@@ -1,7 +1,7 @@
 import requests, time, hmac, hashlib
 from requests.auth import AuthBase
 
-COINBASE_API_KEY = 'lqWSwZ85ldfoxV4p'
+COINBASE_API_KEY = ''
 COINBASE_API_SECRET = ''
 
 """ Class to do user authentication """
